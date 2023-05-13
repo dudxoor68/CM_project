@@ -2,12 +2,41 @@
   <head>
     <title>CSS MAKER</title>
     <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!--
+    <meta property="og:url" content="main.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Css Maker" />
+    <meta property="og:description" content="Css 만들기" />
+    <meta property="og:image" content="" />
+    -->
   </head>
   <body>
     <div class="header">
-      <img src="abc.jpg" />
-      <a>Css Maker</a>
-      <button class="log_in">LOG_IN</button>
+      <a class="page_name" onclick="mainMove()">Css Maker</a>
+      <button class="log_in" onclick="loginMove()">로그인</button>
+    </div>
+    <div class="main">
+      <section class="practice">
+        box-shadow <br /><iframe class="iframe" src="box-shadow.html"></iframe>
+      </section>
+      <section class="practice">
+        box-shadow <br /><iframe class="iframe" src="shadow2.html"></iframe>
+      </section>
+      <button class="goHeader" onclick="goHeader()">TOP</button>
     </div>
   </body>
+  <script>
+    function mainMove() {
+      location.href = "main.html"; // login버튼 클릭시 이동할 주소
+    }
+
+    function loginMove() {
+      location.href = "#"; // login버튼 클릭시 이동할 주소
+    }
+
+    function goHeader() {
+      location.href = ""; // 페이지 맨 위로 이동
+    }
+  </script>
 </html>

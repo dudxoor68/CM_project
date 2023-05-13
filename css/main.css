@@ -1,25 +1,97 @@
+/* 페이지 width에 상관없이 적용*/
+/* 1023px ~ */
 body {
   margin: 0px;
   border: 0px;
   padding: 0px;
 }
-.log_in {
-  font-size: 25px;
-  width: auto;
-  height: auto;
-  color: aquamarine;
-  background-color: black;
-}
+
 .header {
   width: 100%;
   height: 55px;
   background-color: white;
   border-bottom: 1px solid rgb(180, 180, 180);
-  display: flex;
+  display: inline-flex;
+  position: fixed;
+  z-index: 100;
 }
 
-.header a {
+.header .log_in:hover {
+  border-color: rgba(32, 78, 207, 1); /* 1이 완전불투명,0이 완전투명 */
+  color: rgba(32, 78, 207, 1);
+}
+
+.main {
+  height: 150%; /* main구상후 수정 */
+  background-color: white;
+  padding-top: 55px;
+}
+
+.header .log_in {
+  font-size: 20px;
+  font-weight: bold;
+  width: auto;
+  height: 45px;
+  border-radius: 30px;
+  color: rgba(32, 78, 207, 0.5);
+  background-color: white;
+  border-color: rgba(32, 78, 207, 0.5);
+  position: relative;
+  top: 50%;
+  margin-top: -22.5px;
+}
+
+.header .page_name {
   font-size: 40px;
   font-weight: bold;
-  color: aquamarine;
+  background: linear-gradient(to right top, aquamarine, black);
+  color: transparent;
+  -webkit-background-clip: text;
+  cursor: pointer;
+  margin-right: 45%;
+}
+
+.goHeader {
+  font-size: 30px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  border: 1px solid black;
+  border-radius: 30px;
+  background-color: rgba(234, 234, 234, 0.5);
+}
+
+.goHeader:hover {
+  background-color: rgba(234, 234, 234, 0.75);
+}
+
+.goHeader:active {
+  background-color: rgba(234, 234, 234, 1);
+}
+
+.iframe {
+  width: 70%;
+  height: 30%;
+}
+
+@media screen and (max-width: 1023px) {
+  /* 768px ~ 1023px */
+  .header .page_name {
+    background: linear-gradient(to right top, yellow, black);
+    color: transparent;
+    -webkit-background-clip: text;
+  }
+}
+
+@media (max-width: 768px) {
+  /* ~768px */
+  .header .page_name {
+    background: linear-gradient(to right top, red, black);
+    color: transparent;
+    -webkit-background-clip: text;
+  }
+
+  .header .log_in {
+    font-size: 16px;
+  }
 }

@@ -1,0 +1,8 @@
+/* 처음 나오는 결과의 css  */
+#example-element {
+  margin: 20px auto;
+  padding: 0;
+  border: 2px solid #333;
+  width: 80%;
+  text-align: center;
+}
