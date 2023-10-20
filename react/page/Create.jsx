@@ -55,7 +55,7 @@ function Create(props) {
   }
 
   const handleBorder = (event) => {
-    document.querySelector(".input_css").value = ".className{ \n border: " + event.border_width +"px " + "solid " + "rgba(100,100,100,1); \n border-radius: " + event.border_radius + "px;" ;
+    document.querySelector(".input_css").value = ".className{ \n border: " + event.border_width +"px " + event.border_style + " rgba(100,100,100,1); \n border-radius: " + event.border_radius + "px;" ;
     updateCssCode();
   }
 
