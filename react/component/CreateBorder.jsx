@@ -10,10 +10,23 @@ function CreateBorder(props) {
   const [isBorderRadius, setIsBorderRadius] = useState(4);
   const [isBorderWidth, setIsBorderWidth] = useState(0);
 
+  const [colorR,setColorR] = useState(100);
+  const [colorG,setColorG] = useState(100);
+  const [colorB,setColorB] = useState(100);
+  const [colorA,setColorA] = useState(1);
+  const [isColor,setIsColor]= useState("#"+convertColor(colorR)+convertColor(colorG)+convertColor(colorB));
+
 
   let border_radius = isBorderRadius;
   let border_width = isBorderWidth;
-  let border_style = isStyleValue
+  let border_style = isStyleValue;
+
+  /* useState상태로 상위 컴포넌트로 넘기면 늦게 적용되므로 변수로 넘긴다. */
+  let color_r = colorR;
+  let color_g = colorG;
+  let color_b = colorB;
+  let color_a = colorA;
+  let using = isUsing;
 
 
   const handleShow = () => {
@@ -26,13 +39,20 @@ function CreateBorder(props) {
 
   const handleUsing = () => {
     if (isUsing === "using") {
-      setIsUsing("notUsing");
+      using = "notUsing";
     } else if (isUsing === "notUsing") {
-      setIsUsing("using");
+      using = "using";
     }
+    setIsUsing(using);
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
   };
 
   const handleStyle = () => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
     if(isStyle === "select_border_style"){
       setIsStyle("select_border_style selected")
     }else if(isStyle === "select_border_style selected"){
@@ -58,20 +78,127 @@ function CreateBorder(props) {
         default: border_style = "solid";
       }
       setIsStyleValue(border_style);
-    props.onBorder({border_style,border_radius,border_width});
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
   }
 
   const handleRadius = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
     border_radius = event.target.value;
     setIsBorderRadius(border_radius);
-    props.onBorder({border_style,border_radius,border_width});
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
   }
 
   const handleWidth = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
     border_width = event.target.value;
     setIsBorderWidth(border_width);
-    props.onBorder({border_style,border_radius,border_width});
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
   }
+
+
+  /* 10진수를 16진수로 바꿔주는 함수 ex) 10 -> a */
+  function convertColor(color){
+    let readyColor = parseInt(color,10); //10진수로 바꾸고
+    let converted_color = readyColor.toString(16); //16진수로 바꿈
+
+    return converted_color.length === 1 ? "0" + converted_color : converted_color;
+  }
+
+  const handleColorR = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
+
+    color_r = event.target.value;
+    if(color_r < 0 ){
+      color_r = 0;
+    }else if(color_r > 255){
+      color_r = 255;
+    }
+    setColorR(color_r);
+    setIsColor("#"+convertColor(color_r)+convertColor(color_g)+convertColor(color_b));
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
+  }
+  const handleColorG = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
+
+    color_g = event.target.value;
+    if(color_g < 0 ){
+      color_g = 0;
+    }else if(color_g > 255){
+      color_g = 255;
+    }
+    setColorG(color_g);
+    setIsColor("#"+convertColor(color_r)+convertColor(color_g)+convertColor(color_b));
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
+  }
+  const handleColorB = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
+
+    color_b = event.target.value;
+    if(color_b < 0 ){
+      color_b = 0;
+    }else if(color_b > 255){
+      color_b = 255;
+    }
+    setColorB(color_b);
+    setIsColor("#"+convertColor(color_r)+convertColor(color_g)+convertColor(color_b));
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
+  }
+  const handleColorA = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
+
+    let color_a = event.target.value;
+    if (color_a > 1){
+      color_a = 1;
+    }
+    setColorA(color_a);
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
+  }
+
+  const handleColorAll = (event) => {
+    if (isUsing === "notUsing") {
+      using="using";
+    }
+    setIsUsing("using");
+
+
+    let color = event.target.value;       //16진수로 나옴
+    let color_r = parseInt(color.substring(1,3),16);     //16진수를 10진수로 표현
+    let color_g = parseInt(color.substring(3,5),16);
+    let color_b = parseInt(color.substring(5,7),16);
+
+    setColorR(color_r);
+    setColorG(color_g);
+    setColorB(color_b);
+    setIsColor(color);
+
+    /* 상위컴포넌트(Create.jsx)로 값 보내기 */
+    props.onBorder({border_style,border_radius,border_width,color_r,color_g,color_b,color_a,using});
+  }
+
 
 
   return (
@@ -146,6 +273,26 @@ function CreateBorder(props) {
             <p>Border Width</p>
             <input type="range" min="0" max="75" step="1" value={isBorderWidth} onInput={handleWidth}/>{isBorderWidth}
           </div>
+
+          <div className="create_color select">
+            <div className="create_color c">
+              Color<input type="color" className="create_color_show" value={isColor} onChange={handleColorAll}/>
+            </div>
+            <div className="create_color r">
+              R<input type="text" value={colorR} onInput={handleColorR} placeholder="type..."/>
+            </div>
+            <div className="create_color b">
+              G<input type="text" value={colorG} onInput={handleColorG} placeholder="type..."/>
+            </div>
+            <div className="create_color g">
+              B<input type="text" value={colorB} onInput={handleColorB} placeholder="type..."/>
+            </div>
+            <div className="create_color a">
+              A<input type="text" value={colorA} onInput={handleColorA} placeholder="type..."/>
+              <input type="range" min="0" max ="1" step="0.01" value={colorA} onInput={handleColorA}/>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

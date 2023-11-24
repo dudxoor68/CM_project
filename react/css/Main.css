@@ -234,16 +234,27 @@
   background-color: var(--main-color);
 }
 
-.copyButton:hover {
+.copyButton:hover , .saveButton:hover{
   background-color: rgba(92, 150, 250, 0.9);
 }
 
-.copyButton:active {
+.copyButton:active , .saveButton:active{
   background-color: rgba(92, 150, 250, 0.85);
 }
 
 .copyButton svg {
   margin-top: 5px;
+}
+
+.saveButton {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+  right: 70px;
+  top: 100px;
+  border-radius: 50%;
+  background-color: var(--main-color);
 }
 
 /*    ---------------------------------component---------------------------------    */
@@ -553,12 +564,8 @@ header {
   margin-bottom: 10px;
 }
 
-.create_border img {
-  width: 10px;
-  height: 10px;
-}
-
 .select_border_style{
+  width: 90%;
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
@@ -581,8 +588,9 @@ header {
 }
 
 .select_border_style ul{
+  width: 200px;
   border: 1px solid #999;
-  position: absolute;
+  position: relative;
   background-color: #fff;
   border-top:none;
   margin: 1px 0 0 -1px;
@@ -602,5 +610,5 @@ header {
 }
 
 .select_border_style ul li:hover{
-  background-color: #5c96fa;
+  background-color: rgba(92,150,250,0.5);
 }

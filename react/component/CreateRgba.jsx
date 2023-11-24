@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import CreateTitle from "./CreateTitle";
 import CreateUsing from "./CreateUsing";
 
@@ -10,7 +10,7 @@ function CreateRgba(props) {
   const [colorR,setColorR] = useState(255);
   const [colorG,setColorG] = useState(255);
   const [colorB,setColorB] = useState(255);
-  const [colorA,setColorA] = useState(1);
+  const [colorA,setColorA] = useState(0.5);
   const [isColor,setIsColor]= useState("#"+convertColor(colorR)+convertColor(colorG)+convertColor(colorB));
 
   /* useState상태로 상위 컴포넌트로 넘기면 늦게 적용되므로 변수로 넘긴다. */

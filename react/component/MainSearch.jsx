@@ -32,8 +32,6 @@ function MainSearch(props) {
         <table>
           <td>HTML</td>
           <td>CSS</td>
-          <td>ICON</td>
-          <td>JS</td>
         </table>
       </div>
     </div>
