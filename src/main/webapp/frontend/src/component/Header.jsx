@@ -15,9 +15,10 @@ function Header(props){
                 setUser(response.data);
                 if(!(response.data === "")){
                     setIsLog("Login");
-                    if(window.location.href === "http://localhost:8080/#/create"){
+                    if(window.location.href === "http://localhost:8080/#/Create"){
                         let name = response.data.userName;
                         props.onWriter({name});
+                        console.log(name);
                     }
                 }else{
                     setIsLog("not_login");
@@ -52,7 +53,7 @@ function Header(props){
             <button className="login_button" type="submit">로그아웃</button>
         </form>
         }
-        <Link to="/create" className="create_link">
+        <Link to="/Create" className="create_link">
             <button className="create_button">제작</button>
         </Link>
     </header>

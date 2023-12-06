@@ -29,10 +29,7 @@ function MainSearch(props) {
           <option>bb</option>
           <option>cc</option>
         </datalist>
-        <table>
-          <td>HTML</td>
-          <td>CSS</td>
-        </table>
+
       </div>
     </div>
   );

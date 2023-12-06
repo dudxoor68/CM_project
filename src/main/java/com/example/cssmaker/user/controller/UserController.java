@@ -41,7 +41,7 @@ public class UserController implements ErrorController {
 
     }
 
-    @PostMapping("api/Login/{after}/find")
+    @RequestMapping("api/find")
     public User userFind(@RequestParam String userName) throws IOException{
 
         User user = userService.userFind(userName);
@@ -59,7 +59,7 @@ public class UserController implements ErrorController {
         User user = userService.userLogin(userId,userPw);
 
         if(user == null){
-            response.sendRedirect("/Login?after=logNo");
+            response.sendRedirect("/#/Login?after=logNo");
         }else{
             session.setAttribute("userLogin",user);
             response.sendRedirect("/#/Main?after=log");

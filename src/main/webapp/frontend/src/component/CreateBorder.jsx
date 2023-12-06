@@ -250,7 +250,7 @@ function CreateBorder(props) {
                   <li value="0">none</li>
                   <li value="1">hidden</li>
                   <li value="2">dotted</li>
-                  <li value="3">dashed/asdsadsa</li>
+                  <li value="3">dashed</li>
                   <li value="4">solid</li>
                   <li value="5">double</li>
                   <li value="6">groove</li>

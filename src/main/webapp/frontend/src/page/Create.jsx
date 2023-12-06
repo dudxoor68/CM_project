@@ -4,6 +4,7 @@ import Header from "../component/Header";
 import CreateRgba from "../component/CreateRgba";
 import CreateBorder from "../component/CreateBorder";
 import {useLocation} from "react-router";
+import axios from "axios";
 
 
 
@@ -14,20 +15,73 @@ function Create(props) {
   const [cssCode,setCssCode] = useState();
   const [writer,setWriter] = useState("");
 
+
   const location = useLocation();
   const afterParam = new URLSearchParams(location.search).get('after');
 
+
+
+  useEffect(() => {
+
+    const urlParams = new URLSearchParams(window.location.hash.slice(1));
+    const after = urlParams.get('after');
+    const num = urlParams.get('num');
+
+    if(afterParam === "view"){
+
+    // 서버로 데이터를 전송하기 위한 AJAX 요청
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/api/Create', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    const paramData = JSON.stringify({ after, num });
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          // 서버로부터의 응답 처리
+          console.log('서버 응답:', xhr.responseText);
+
+          const jsonResponse = JSON.parse(xhr.responseText);
+          const productHtml = jsonResponse.productHtml;
+          const productCss = jsonResponse.productCss;
+
+          console.log('productHtml:', productHtml);
+          console.log('productCss:', productCss);
+          document.querySelector(".input_html").value = productHtml;
+          document.querySelector(".input_css").value = productCss.replace("{","{\n").replaceAll(";",";\n");
+          updateCssCode();
+        } else {
+          // 서버 오류 등의 처리
+          console.error('서버 오류:', xhr.status);
+        }
+      }
+    };
+
+    xhr.send(paramData);
+    }
+
+  }, []);
+
+
+
+
+
   if(afterParam === "save"){
     alert("코드저장을 성공했습니다.");
+  }else if(afterParam === "view"){
+
   }
 
 
-
   const openModal = () => {
-    setModalOpen("create_modal_open");
-    setHtmlCode(document.querySelector(".input_html").value);
-    setCssCode(document.querySelector(".input_css").value);
-
+    if(afterParam ==="view"){
+      alert("타인의 제작물은 저장할수 없습니다.");
+    }else {
+      setModalOpen("create_modal_open");
+      setHtmlCode(document.querySelector(".input_html").value);
+      setCssCode(document.querySelector(".input_css").value);
+    }
   };
 
 

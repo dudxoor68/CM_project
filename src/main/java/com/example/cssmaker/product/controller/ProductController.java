@@ -2,18 +2,14 @@ package com.example.cssmaker.product.controller;
 
 import com.example.cssmaker.product.Product;
 import com.example.cssmaker.product.service.ProductService;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000/")
@@ -40,9 +36,33 @@ public class ProductController {
     public List<Product> ProductList(){
         List<Product> product = productService.ProductList();
 
-        System.out.println("main");
         return product;
     }
 
+//    @RequestMapping("api/Create")
+//    public Product ProductView(@RequestParam(name = "after", required = false) String after,
+//                               @RequestParam(name = "num", required = false) Integer num){   //Integer 대신 int 사용시 오류
+//        Product product = new Product();
+//        if(after!= null && after.equals("view")){
+//            product = productService.ViewProduct(num);
+//        }
+//
+//        System.out.println(product);
+//        System.out.println(after);
+//        System.out.println(num);
+//        return product;
+//    }
+
+
+    @PostMapping("api/Create")
+    public Product handlePostRequest(@RequestBody(required = false) JsonNode requestBody) {
+        // requestBody를 사용하여 서버 측에서의 로직 수행
+        String after = requestBody.get("after").asText();
+        int num = requestBody.get("num").asInt();
+
+        Product product = productService.ViewProduct(num);
+        System.out.println(product);
+        return product;
+    }
 
 }

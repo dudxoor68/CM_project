@@ -24,4 +24,10 @@ public class ProductService implements InterfaceProductService{
         return product;
     }
 
+    @Override
+    public Product ViewProduct(Integer productNum){
+        Product product = iproduct.findByProductNum(productNum);
+        return product;
+    }
+
 }

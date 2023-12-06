@@ -5,11 +5,12 @@ import MainSearch from "../component/MainSearch";
 import TopButton from "../component/TopButton";
 import Header from "../component/Header";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 function Main() {
 
 
-    const [lists, setLists] = useState();
+    const [lists, setLists] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,8 +27,6 @@ function Main() {
     }, []);
 
 
-
-
   return (
     <div>
         <Header></Header>
@@ -42,28 +41,12 @@ function Main() {
       </div>
       <div className="view_box">
 
+          {lists.map((list) => (
+              <Link to={`/Create?after=view&num=${list.productNum}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <MainView num={list.productNum} html={list.productHtml} css={list.productCss} title={list.productTitle} writer={list.productWriter} />
+              </Link>
+          ))}
 
-        <MainView title={"b"} writer={"ss"}></MainView>
-        <MainView title={"c"} writer={"dd"}></MainView>
-        <MainView title={"d"} writer={"vv"}></MainView>
-        <MainView title={"e"} writer={"gg"}></MainView>
-        <MainView title={"title"} writer={"writer"}></MainView>
-
-
-
-          {/*{lists.map((item) => (*/}
-          {/*    <MainView title={item.productTitle} writer={item.productWriter} key = {item.productNum}     />*/}
-          {/*))}*/}
-
-          {/*{list.map((mainView, i) => (*/}
-          {/*<div>*/}
-          {/*    <div className="viewBlock">*/}
-          {/*        <img alt="contentsImg"></img>*/}
-          {/*    </div>*/}
-          {/*    <p className="viewTitle">{props.title}</p>*/}
-          {/*    <p className="viewWriter">{props.writer}</p>*/}
-          {/*</div>*/}
-          {/*))}*/}
       </div>
       <TopButton></TopButton>
     </div>

@@ -9,4 +9,6 @@ public interface InterfaceProductService {
     void SaveCode(Product product);
 
     List<Product> ProductList();
+
+    Product ViewProduct(Integer productNum);
 }
