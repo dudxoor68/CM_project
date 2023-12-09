@@ -298,7 +298,12 @@
   display: none;
 }
 
-
+.productHtml, .productCss{
+  width:500px;
+  height: 160px;
+  border: 1px solid rgba(0,0,0,0.2);
+  resize: none;
+}
 
 
 /*    ---------------------------------component---------------------------------    */

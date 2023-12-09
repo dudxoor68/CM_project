@@ -4,7 +4,7 @@ import Header from "../component/Header";
 import CreateRgba from "../component/CreateRgba";
 import CreateBorder from "../component/CreateBorder";
 import {useLocation} from "react-router";
-import axios from "axios";
+//import axios from "axios";
 
 
 
@@ -244,8 +244,8 @@ function Create(props) {
         <form method="get" action="api/codesave">
           작성자 : <input className="productWriter" name="productWriter" type="text" value={writer} readOnly={true}/>{'\n'}
           제목 : <input className="productTitle" name="productTitle" type="text"/>{'\n'}{'\n'}
-          HTML : <input className="productHtml" name="productHtml" type="text" value={htmlCode} readOnly={true}/>{'\n'}
-          CSS : <input className="productCss" name="productCss" type="text" value={cssCode} readOnly={true}/>{'\n'}
+          HTML : <textarea className="productHtml" name="productHtml" type="text" value={htmlCode} readOnly={true}/>{'\n'}
+          CSS : <textarea className="productCss" name="productCss" type="text" value={cssCode} readOnly={true}/>{'\n'}
         <button className="modal_save" type="submit" >code save</button>
         <button className="modal_cancle" onClick={closeModal}>cancle</button>
         </form>
